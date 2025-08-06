@@ -41,7 +41,7 @@ const renderTodos = () => {
         filteredTasks.forEach(task => {
             const todoItem = document.createElement('div');
             // Menambahkan kelas untuk animasi
-            todoItem.classList.add('grid', 'grid-cols-1', 'md:grid-cols-4', 'gap-4', 'items-center', 'bg-slate-800', 'p-3', 'rounded-lg', 'animate-fade-in');
+            todoItem.classList.add('grid', 'grid-cols-1', 'md:grid-cols-4', 'gap-4', 'items-center', 'bg-blue-900', 'p-3', 'rounded-lg', 'animate-fade-in');
             
             // Layout responsif untuk mobile
             todoItem.innerHTML = `
