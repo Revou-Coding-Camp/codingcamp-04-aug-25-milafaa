@@ -4,43 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-slate-900 flex items-center justify-center min-h-screen font-sans">
 
-    <div class="container mx-auto mt-10 p-5 md:max-w-2xl">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-cyan-400">To-Do List</h1>
-        </header>
+    <div class="w-full max-w-2xl mx-auto p-4">
+        <div class="bg-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-center text-white mb-6">Todo List</h1>
 
-        <!-- Form untuk menambahkan tugas baru -->
-        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
-            <form id="todo-form" class="flex flex-col sm:flex-row gap-4">
-                <input type="text" id="task-input" placeholder="Tugas Baru" class="flex-grow bg-gray-700 text-white border-2 border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:border-cyan-500 transition duration-300">
-                <input type="date" id="date-input" class="bg-gray-700 text-white border-2 border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:border-cyan-500 transition duration-300">
-                <button type="submit" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-6 rounded-md transition duration-300">Tambah</button>
+            <!-- Form Input -->
+            <form id="todo-form" class="flex items-center gap-2 md:gap-4 mb-4">
+                <input type="text" id="task-input" placeholder="Add a task..." class="flex-grow bg-slate-700 text-white border-2 border-slate-600 rounded-lg py-2 px-4 focus:outline-none focus:border-indigo-500 transition duration-300">
+                <input type="date" id="date-input" class="bg-slate-700 text-white border-2 border-slate-600 rounded-lg py-2 px-4 focus:outline-none focus:border-indigo-500 transition duration-300">
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold p-3 rounded-lg transition duration-300 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                </button>
             </form>
-            <p id="error-message" class="text-red-500 mt-2 text-sm hidden">Mohon isi nama tugas dan tanggal.</p>
-        </div>
+             <p id="error-message" class="text-red-500 text-center mb-4 text-sm hidden">Mohon isi nama tugas dan tanggal.</p>
 
-        <!-- Daftar tugas -->
-        <div id="todo-list" class="space-y-4">
-            <!-- Contoh item tugas (akan diisi oleh JavaScript) -->
-            <!-- 
-            <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-between transition duration-300">
-                <div>
-                    <p class="font-semibold">Contoh Tugas</p>
-                    <p class="text-sm text-gray-400">2025-08-07</p>
+            <!-- Tombol Aksi -->
+            <div class="flex items-center justify-between gap-4 mb-6">
+                <button id="filter-button" class="bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">Filter: All</button>
+                <button id="delete-all-button" class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-4 rounded-lg transition duration-300 w-full">Delete All</button>
+            </div>
+
+            <!-- Daftar Tugas -->
+            <div class="bg-slate-900 rounded-lg p-4 min-h-[200px]">
+                <!-- Header Tabel -->
+                <div class="hidden md:grid grid-cols-4 gap-4 text-sm font-bold text-slate-400 border-b border-slate-700 pb-2 mb-2">
+                    <div>TASK</div>
+                    <div>DUE DATE</div>
+                    <div>STATUS</div>
+                    <div>ACTIONS</div>
                 </div>
-                <button class="text-red-500 hover:text-red-700 transition duration-300">Hapus</button>
-            </div> 
-            -->
+
+                <!-- Kontainer List -->
+                <div id="todo-list" class="space-y-3">
+                    <!-- Tugas akan dirender di sini oleh JavaScript -->
+                </div>
+                
+                <p id="no-task-message" class="text-slate-500 text-center pt-10">No task found</p>
+            </div>
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- Modal Konfirmasi Hapus Semua -->
+    <div id="delete-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-800 rounded-lg shadow-xl p-6 w-full max-w-sm text-center">
+            <h3 class="text-lg font-bold text-white mb-4">Confirm Deletion</h3>
+            <p class="text-slate-300 mb-6">Are you sure you want to delete all tasks? This action cannot be undone.</p>
+            <div class="flex justify-center gap-4">
+                <button id="cancel-delete-button" class="bg-slate-600 hover:bg-slate-500 text-white font-semibold py-2 px-6 rounded-lg transition">Cancel</button>
+                <button id="confirm-delete-button" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menghubungkan ke file JavaScript dengan atribut defer -->
+    <script src="script.js" defer></script>
 </body>
 </html>
