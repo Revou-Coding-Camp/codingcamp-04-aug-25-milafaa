@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <div class="container mx-auto mt-10 p-5 md:max-w-2xl">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-cyan-400">To-Do List</h1>
+        </header>
+
+        <!-- Form untuk menambahkan tugas baru -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+            <form id="todo-form" class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="task-input" placeholder="Tugas Baru" class="flex-grow bg-gray-700 text-white border-2 border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:border-cyan-500 transition duration-300">
+                <input type="date" id="date-input" class="bg-gray-700 text-white border-2 border-gray-600 rounded-md py-2 px-4 focus:outline-none focus:border-cyan-500 transition duration-300">
+                <button type="submit" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-6 rounded-md transition duration-300">Tambah</button>
+            </form>
+            <p id="error-message" class="text-red-500 mt-2 text-sm hidden">Mohon isi nama tugas dan tanggal.</p>
+        </div>
+
+        <!-- Daftar tugas -->
+        <div id="todo-list" class="space-y-4">
+            <!-- Contoh item tugas (akan diisi oleh JavaScript) -->
+            <!-- 
+            <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-between transition duration-300">
+                <div>
+                    <p class="font-semibold">Contoh Tugas</p>
+                    <p class="text-sm text-gray-400">2025-08-07</p>
+                </div>
+                <button class="text-red-500 hover:text-red-700 transition duration-300">Hapus</button>
+            </div> 
+            -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
